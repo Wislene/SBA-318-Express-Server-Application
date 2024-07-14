@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Menus</title>
+    <link rel="stylesheet" href="../public/style.css" />
+  </head>
+  <body>
+    <h1>All Menus</h1>
+    <ul>
+      <% menus.forEach(menu => { %>
+      <li>
+        <a href="/menus/<%= menu.id %>"><%= menu.name %></a>
+        <a href="/menus/<%= menu.id %>/edit">Edit</a>
+        <form
+          action="/menus/<%= menu.id %>?_method=DELETE"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <a href="/menus/add">Add a New Menu</a>
+  </body>
+</html>

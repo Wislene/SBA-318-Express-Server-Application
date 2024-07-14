@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= menu.name %></title>
+    <link rel="stylesheet" href="../public/style.css" />
+</head>
+<body>
+    <h1>Menu for <%= menu.name %></h1>
+    <ul>
+        <li>Starter: <%= menu.menu.starter %></li>
+        <li>Main Course: <%= menu.menu.mainCourse %></li>
+        <li>Dessert: <%= menu.menu.dessert %></li>
+    </ul>
+    <a href="/menus">Back to Menus</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Menu</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Edit Menu</h1>
+    <form action="/menus/<%= menu.id %>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= menu.name %>" required><br>
+        <label for="starter">Starter:</label>
+        <input type="text" id="starter" name="starter" value="<%= menu.menu.starter %>" required><br>
+        <label for="mainCourse">Main Course:</label>
+        <input type="text" id="mainCourse" name="mainCourse" value="<%= menu.menu.mainCourse %>" required><br>
+        <label for="dessert">Dessert:</label>
+        <input type="text" id="dessert" name="dessert" value="<%= menu.menu.dessert %>" required><br>
+        <button type="submit">Update Menu</button>
+    </form>
+    <a href="/menus">Back to Menus</a>
+</body>
+</html>

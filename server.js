@@ -1,71 +1,69 @@
-// import express from 'express' ;
 const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const methodOverride = require("method-override");
 
 const app = express();
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+
+// Error handling for JSON parsing
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    console.error("Bad JSON");
+    return res
+      .status(400)
+      .send({ status: 400, message: "JSON Parsing Not Working" });
+  }
+  next();
+});
+
+// Set view engine
 app.set("view engine", "ejs");
 
+// Custom middleware
+const logRequests = require("./middlewares/logRequests");
+app.use(logRequests);
 
+const errorHandler = require("./middlewares/errorHandler");
+app.use(logRequests);
 
-// const bodyParser = require('body-parser');
+// Routes
+const userRoutes = require("./routes/users");
+const menuRoutes = require("./routes/menus");
+const commentRoutes = require("./routes/comments");
 
-// app.use(bodyParser.json());
+app.use("/users", userRoutes);
+app.use("/menus", menuRoutes);
+app.use("/users", commentRoutes);
+
+// Error-handling middleware
+const errorHandler = require("./middlewares/errorHandler");
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
-  res.send("index.ejs");
+  res.render("index", { title: "Dinner Menu App" });
 });
 
-app.use(express.static("public"));
+// Start the server: npx nodemon server.js
 
-app.get("/", (req, res) => {
-  res.render("Hello from Homepage.");
-});
-
-// app.get('/', (req,res) => {
-//   // console.log('[test]');
-//   res.send('hello from Homepage.');
-// });
-
-// routes
-
-// app.listen(3000);
-
-// Come back to this one:
-// console.log('Listening on Port 3000...');
-
-const PORT = process.env.PORT || 3000;
-// const PORT = 3000;
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Server App Listening on port at http://localhost:${PORT}`);
 });
-// const express = require('express');
-// const path = require('path');
-// const app = express();
-// const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
 
-// Set view engine to EJS
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+// app.use(express.static("public"));
 
-// Middleware to parse form data
-// app.use(express.urlencoded({ extended: false }));
-
-// Serve static files
-// app.use(express.static(path.join(__dirname, 'data')));
-
-// Middleware for logging requests
-// app.use((req, res, next) => {
-//   console.log(`${req.method} request for '${req.url}'`);
-//   next();
+// app.get("/", (req, res) => {
+//   res.render("Hello from Homepage.");
 // });
 
-// Use the routers
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-
-// Start the server
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
+// app.get('/', (req,res) => {
+//   // console.log('[test]');
+//   res.send('hello from Homepage.');
 // });
