@@ -5,13 +5,13 @@ const path = require('path');
 
 const usersFilePath = path.join(__dirname, '../data/users.json');
 
-// Helper function to read users data
+// Function to read users data
 const readUsers = () => {
   const usersData = fs.readFileSync(usersFilePath);
   return JSON.parse(usersData);
 };
 
-// Helper function to write users data
+// Function to write users data
 const writeUsers = (users) => {
   fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
 };
@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
   res.json(user);
 });
 
-// POST a new user
+// POST (create) a new user
 router.post('/', (req, res) => {
   const users = readUsers();
   const newUser = {

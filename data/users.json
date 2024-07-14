@@ -1,5 +1,21 @@
 [
-  { "id": 1, "name": "Judith Nelson", "comments": [] },
-  { "id": 2, "name": "Toby McGuire", "comments": [] },
-  { "id": 3, "name": "Liam Bobo", "comments": [] }
+  {
+    "id": 1,
+    "name": "Judith Nelson",
+    "comments": []
+  },
+  {
+    "id": 2,
+    "name": "Toby McGuire",
+    "comments": []
+  },
+  {
+    "id": 3,
+    "name": "Liam Bobo",
+    "comments": []
+  },
+  {
+    "id": 4,
+    "comments": []
+  }
 ]

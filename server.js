@@ -1,9 +1,12 @@
 const express = require("express");
+
 const bodyParser = require("body-parser");
 const path = require("path");
+const logger = require("./middlewares/logRequests");
 const methodOverride = require("method-override");
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,12 +27,10 @@ app.use((err, req, res, next) => {
 
 // Set view engine
 app.set("view engine", "ejs");
+app.set("views", "./views");
 
 // Custom middleware
 const logRequests = require("./middlewares/logRequests");
-app.use(logRequests);
-
-const errorHandler = require("./middlewares/errorHandler");
 app.use(logRequests);
 
 // Routes
@@ -41,7 +42,7 @@ app.use("/users", userRoutes);
 app.use("/menus", menuRoutes);
 app.use("/users", commentRoutes);
 
-// Error-handling middleware
+// Error-handling
 const errorHandler = require("./middlewares/errorHandler");
 app.use(errorHandler);
 
@@ -51,19 +52,6 @@ app.get("/", (req, res) => {
 
 // Start the server: npx nodemon server.js
 
-const PORT = 3000;
-
 app.listen(PORT, () => {
   console.log(`Server App Listening on port at http://localhost:${PORT}`);
 });
-
-// app.use(express.static("public"));
-
-// app.get("/", (req, res) => {
-//   res.render("Hello from Homepage.");
-// });
-
-// app.get('/', (req,res) => {
-//   // console.log('[test]');
-//   res.send('hello from Homepage.');
-// });
