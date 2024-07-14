@@ -1,0 +1,24 @@
+body {
+  max-width: 750px;
+  margin: auto;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  padding: 0;
+ 
+}
+
+img {
+  width: 100px;
+}
+
+h1 {
+  color: blue;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10p 0;
+}

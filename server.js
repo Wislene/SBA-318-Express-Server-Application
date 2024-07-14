@@ -2,13 +2,22 @@
 const express = require("express");
 
 const app = express();
+app.set("view engine", "ejs");
+
+
 
 // const bodyParser = require('body-parser');
 
 // app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("hello from Homepage.");
+  res.send("index.ejs");
+});
+
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.render("Hello from Homepage.");
 });
 
 // app.get('/', (req,res) => {
@@ -35,9 +44,9 @@ app.listen(PORT, () => {
 // const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users');
 
-// Set view engine to Pug
+// Set view engine to EJS
 // app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
+// app.set('view engine', 'ejs');
 
 // Middleware to parse form data
 // app.use(express.urlencoded({ extended: false }));
